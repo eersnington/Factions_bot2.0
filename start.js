@@ -9,6 +9,12 @@ const https = require('https');
 const intents = new Discord.Intents(32727);
 const client = new Discord.Client({intents});
 
+client.commands = new Discord.Collection();
+client.events = new Discord.Collection();
+client.config = YAML.load(fs.readFileSync("config.yml"));
+client.db = require('quick.db');
+client.toggle = false;
+
 hwid({
     hash: true, 
 }).then(id =>{
@@ -31,10 +37,14 @@ hwid({
                 }else{
                     client.toggle = true
                     console.log(chalk.blue("[Glowstone] » Authentication Successful"))
-                    return client.login(client.config.discord_bot_token).catch(()=> console.log(chalk.red("[Glowstone] Discord bot token is Invalid! (Make sure you've enabled privledged intents in Devs Portal for your bot)")))
+                    return client.login(String(client.config.discord_bot_token)).catch((err)=> {
+                        console.log(chalk.red("[Glowstone] Discord bot token is Invalid! (Make sure you've enabled privledged intents in Devs Portal for your bot)"))
+                        console.log(err)
+                    })
                 }
 
             }catch (err){
+
                 console.log(chalk.hex("#e12120")("[Glowstone] » Authentication Failed"))
                 process.exit(0)
             }
@@ -43,14 +53,10 @@ hwid({
     })
 })
 
-client.commands = new Discord.Collection();
-client.events = new Discord.Collection();
-client.config = YAML.load(fs.readFileSync("config.yml"));
-client.db = require('quick.db');
-client.toggle = false;
 
-client.options = {
-    color: "#F1C40F",
+if (!client.db.get('options')) {
+    client.options = client.db.set('options',{
+    color: client.config.embed_color,
     //mineflayer variables
     online: false,
     config: {mc_username: client.config.username, mc_password: client.config.password,  auth: client.config.auth}, 
@@ -78,14 +84,15 @@ client.options = {
     macros: {},
     playtime:{},
     vanish: {track: false, count: 0, list: []}
+    })
+}else{
+    client.options = client.db.get('options')
 }
-
-if (!client.db.get('options')) client.db.set('options', {})
 
 logs(client);
 
 // HANDLERS
-require(`./handlers/command`)//(client, Discord);
+require(`./handlers/command`)(client, Discord);
 require(`./handlers/events`)//(client, Discord);
 require(`./handlers/giveaways`)//(client, Discord);
 require(`./handlers/automod`)//(client, Discord);

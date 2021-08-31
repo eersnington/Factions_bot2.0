@@ -10,9 +10,6 @@ module.exports = (client, Discord) =>{
             const command = require(`.${commands_dir}${folder}/${file}`);
 
             client.commands.set(command.name, command);
-            client.commands.get(command.name).whitelist = client.cmdyml[folder][command.name].whitelist
-            client.commands.get(command.name).dev = client.cmdyml[folder][command.name].dev
-            client.commands.get(command.name).requiredPerms = client.cmdyml[folder][command.name].DiscordPermissions
         }
     }
 }
