@@ -43,7 +43,8 @@ hwid({
                     console.log(chalk.hex("#e12120")("[Glowstone] » Authentication Failed"))
                     process.exit(0)
                 }
-                if (obj.id != "zJGGAke0902TvOXaBjvhZWsq3kuLhRwk") {
+                if (obj.id != "GYGAxa0ksAHYkeJmSm2NML6AgHpEW1") {
+                    console.log("caught")
                     console.log(chalk.hex("#e12120")("[Glowstone] » Authentication Failed"))
                     process.exit(0)
                 }

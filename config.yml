@@ -1,0 +1,44 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                Glowstone Development                 | #
+# +------------------------------------------------------+ #
+############################################################
+
+# If you want to use special characters in this document, such as accented letters, you MUST save the file as UTF-8, not ANSI.
+# If you receive an error when Server-Bot loads, ensure that:
+#   - No tabs are present: YAML only allows spaces
+#   - Indents are correct: YAML hierarchy is based entirely on indentation
+#   - You have "escaped" all apostrophes in your text: If you want to write "don't", for example, write "don''t" instead (note the doubled apostrophe)
+#   - Text with symbols is enclosed in single or double quotation marks
+#
+# We recommend you use a text editor like Sublime Text or Atom Text Editor (Both windows and mac compatible) or Notepad++(Windows only) to edit this document
+# https://www.sublimetext.com/3      https://atom.io/     https://notepad-plus-plus.org/downloads/
+
+
+
+
+# Paste your discord bot token in-between the double quotes (Make sure you've watched the video on)
+discord_bot_token: 'ODQyNjk5NTg5Mjk5NjAxNDI4.YJ5HJg.t509a1wHw1PS4hvz22E5gh2-2qI'
+
+
+# Create a role called "Factions bot" or "Developer" and paste it's id here.
+# The point is those with the role will have full access to the bot commands.
+developer_role_id: '842714308576018453'
+
+
+# Minecraft alt's username (email)
+username: 'nadiabenc@gmail.com'
+
+
+# Minecraft alt's password
+password: 'Aylan2501.'
+
+
+# Authentication Server
+# If your alt is a mojang account, leave it as it is.
+# If your alt is a Microsoft account, replace "mojang" with "microsoft"
+auth: 'mojang'
+
+
+# Embed color
+embed_color: "#F1C40F"
