@@ -17,17 +17,17 @@ module.exports = {
             .setFooter('Glowstone Bot | Glowstone-Development');
         
         if (client.bot != null){
-    
+
             botEmbed.setTitle(`✅ Disconnected`)
             .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-            .setThumbnail("https://api.minetools.eu/favicon/" + options.minecraft_options.ip)
+            .setThumbnail("https://eu.mc-api.net/v3/server/favicon/" + options.minecraft_options.ip)
             .setDescription(`You have disconnected the bot \`${client.bot.username}\` from \`${options.minecraft_options.ip}\`\n 
             To reconnect, simply issue the command \`${options.discord_options.prefix}join\``);
             client.bot.end()
             client.bot = null;
             options.online = false;
 
-            console.log(chalk.red(`[Glowstone] ${message.author.tag} has Disconnected the Minecraft bot!`));
+            console.log(chalk.red(`[Glowstone] ${message.author.tag} has disconnected the Minecraft bot!`));
             return message.channel.send({embeds: [botEmbed]});
   
         } else {

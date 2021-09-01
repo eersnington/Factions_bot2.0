@@ -1,9 +1,9 @@
 const chalk = require('chalk');
 
 module.exports = {
-    name : 'sudo',
-    description : 'Chat through the bot',
-    usage: 'sudo <message>',
+    name : 'tpa',
+    description : 'Send a tpa request to a player',
+    usage: 'tpa <player_ign>',
     aliases: [],
     whitelist: true,
     dev: true,
@@ -12,17 +12,18 @@ module.exports = {
 
         let options = client.db.get('options');
         const embed = new Discord.MessageEmbed()
-        .setColor(options.color);
+            .setColor(options.color);
 
         if (client.bot != null){
 
             if (args.length == 0) return;
+
             const chat = args.join(" ")
-            
-            client.bot.chat(chat)
+                
+            client.bot.chat(`/tpa ${chat}`)
             setTimeout(()=> {
-                let server_chat = client.data.server_chat
-                let reply = (options.server_chat.toggle) ? embed.setDescription(`:white_check_mark: ${message.author.tag} sent \`${chat}\`\n\`\`\`${server_chat.join("\n")}\`\`\``) : embed.setDescription(`:white_check_mark: ${message.author.tag} sent \`${chat}\``)
+                let tpa = options.server_chat.data
+                let reply = (options.server_chat.toggle) ? embed.setDescription(`:white_check_mark: ${message.author.tag} attempted to send a tpa request to \`${chat}\`\n\`\`\`yaml\n${tpa.join("\n")}\`\`\``) : embed.setDescription(`:white_check_mark: ${message.author.tag} attempted to send a tpa request to \`${chat}\``)
 
                 embed.setColor(options.color)
                 .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
@@ -36,6 +37,5 @@ module.exports = {
             .setFooter('Glowstone Bot | Glowstone-Development');
             return message.channel.send({embeds:[embed]});
         }
-
     }
 }

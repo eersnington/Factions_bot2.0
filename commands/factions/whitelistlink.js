@@ -1,12 +1,12 @@
 const chalk = require('chalk');
 
 module.exports = {
-    name : 'sudo',
-    description : 'Chat through the bot',
-    usage: 'sudo <message>',
-    aliases: [],
-    whitelist: true,
-    dev: true,
+    name : 'whitelistlink',
+    description : 'Link your minecraft account to discord (whitelist)',
+    usage: 'whitelistlink',
+    aliases: ['w-link', 'wlink'],
+    whitelist: false,
+    dev: false,
     requiredPerms: [],
     async execute(client, Discord, message, args){
 

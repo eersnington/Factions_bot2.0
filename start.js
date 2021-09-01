@@ -80,7 +80,7 @@ if (!client.db.get('options')) {
     cegg_alert: false,
     tnt_alert: false,
     logs: false,
-    macros: {},
+    macros: {Macros1 : {content: "/ff DON'T SLACK CANE", interval : "30"}},
     playtime:{},
     vanish: {track: false, count: 0}
     })

@@ -53,7 +53,7 @@ module.exports = {
                 successEmbed.setDescription(`You have successfully set **${opt}** in Minecraft Options`);
 
                 setTimeout(()=> client.user.setActivity(
-                    `${options.minecraft_options.ip} Servers Chat | For Help Do ${options.discord_options.prefix}help`, {
+                    `${options.minecraft_options.ip} Server Chat | For Help Do ${options.discord_options.prefix}help`, {
                         type: "WATCHING"
                     }),1000 )
                     
@@ -194,7 +194,7 @@ module.exports = {
                             set_page_no--;
                             embed.edit({embeds: [pages[set_page_no+1]]});
                         }
-                    };
+                    }
                 });
         
             });

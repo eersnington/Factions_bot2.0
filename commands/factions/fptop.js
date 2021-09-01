@@ -30,7 +30,6 @@ module.exports = {
             
         } else {
             embed.setTitle(`⚠️ Warning`)
-            .setThumbnail("https://api.minetools.eu/favicon/" + options.minecraft_options.ip)
             .setDescription(`There is no bot online in the server \`${options.minecraft_options.ip}\`\n To join the server, simply issue the command \`${options.discord_options.prefix}join\``)
             .setFooter('Glowstone Bot | Glowstone-Development');
             return message.channel.send({embeds: [embed]});

@@ -8,7 +8,7 @@ module.exports = {
     aliases: [],
     whitelist: false,
     dev: true,
-    requiredPerms: [],
+    requiredPerms: ["ADMINISTRATOR"],
     async execute(client, Discord, message, args){
 
         let options = client.db.get('options');

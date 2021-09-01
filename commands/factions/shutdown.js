@@ -2,7 +2,7 @@ const chalk = require('chalk');
 
 module.exports = {
     name: 'shutdown',
-    description: 'Setup faction bot channels',
+    description: 'Closes the client',
     usage: 'shutdown',
     aliases: ['exit', 'pce'],
     whitelist: false,

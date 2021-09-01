@@ -68,7 +68,7 @@ module.exports = {
             return console.log(chalk.red("[Glowstone] Failed to connect"));
         };
         botEmbed.setTitle(`‼️ Login Timeout`)
-        .setThumbnail("https://api.minetools.eu/favicon/" + options.minecraft_options.ip)
+        .setThumbnail("https://eu.mc-api.net/v3/server/favicon/" + options.minecraft_options.ip)
         .setDescription(`The minecraft bot took too long to connect to \`${options.minecraft_options.ip}\`\n 
                         There might be network issues in your end or the server end. Maybe try again in a couple of minutes.`)
         .setColor(options.color)
@@ -77,7 +77,7 @@ module.exports = {
     }, 15000);
   
     botEmbed.setTitle(`🟨 Standby`)
-    .setThumbnail("https://api.minetools.eu/favicon/" + options.minecraft_options.ip)
+    .setThumbnail("https://eu.mc-api.net/v3/server/favicon/" + options.minecraft_options.ip)
     .setDescription(`Please wait a couple of seconds for the bot to join the server.`)
     .setColor(options.color)
     .setFooter('Glowstone Bot | Glowstone-Development');
@@ -110,10 +110,9 @@ module.exports = {
             bot.addChatPattern("deposit", /^(\*|\*\*|\*\*\*|\+|\+\+|\-|\-\-)(\w+) gave ((?=.)(\d{1,3}(,\d{3})*)?(\.\d+)?) to your faction\./, { parse: true});
             bot.addChatPattern("paydeposit", /\$((?=.)(\d{1,3}(,\d{3})*)?(\.\d+)?) has been received from (\w+)\./, { parse: true});
         }
-        console.log("https://api.minetools.eu/favicon/" + options.minecraft_options.ip)
         
         botEmbed.setTitle(`✅ Successful Login`)
-        .setThumbnail("https://api.minetools.eu/favicon/" + options.minecraft_options.ip)
+        .setThumbnail("https://eu.mc-api.net/v3/server/favicon/" + options.minecraft_options.ip)
         .setDescription(`The bot \`${bot.username}\` has succesfully logged into \`${options.minecraft_options.ip}\`\n
                           To check the status, issue the command \`${options.discord_options.prefix}status\`\n
                           If you want to disconnect, then please issue the command \`${options.discord_options.prefix}disconnect\``)
@@ -225,7 +224,7 @@ module.exports = {
         };
   
         botEmbed.setTitle(`⁉️ Bot Kicked`)
-        .setThumbnail("https://api.minetools.eu/favicon/" + options.minecraft_options.ip)
+        .setThumbnail("https://eu.mc-api.net/v3/server/favicon/" + options.minecraft_options.ip)
         .setDescription(`The bot \`${bot.username}\` was kicked from \`${options.minecraft_options.ip}\`\n
                           **Reason:** \`\`\`${reason}\`\`\`
                           The bot will attemp to reconnect in 2 minutes`)
@@ -248,7 +247,7 @@ module.exports = {
         }
   
         botEmbed.setTitle(`⁉️ Bot Error`)
-        .setThumbnail("https://api.minetools.eu/favicon/" + options.minecraft_options.ip)
+        .setThumbnail("https://eu.mc-api.net/v3/server/favicon/" + options.minecraft_options.ip)
         .setDescription(` \`\`\`${err}\`\`\`\n **Minecraft bot has shut down**`)
         .setColor(options.color)
         .setFooter('Glowstone Bot | Glowstone-Development');

@@ -7,7 +7,7 @@ module.exports = async (Discord, client, message) =>{
     }
 
     setTimeout(()=> client.user.setActivity(
-        `${client.db.get('options').minecraft_options.ip} Servers Chat | For Help Do  ${client.db.get('options').discord_options.prefix}help`, {
+        `${client.db.get('options').minecraft_options.ip} Server Chat | For Help Do  ${client.db.get('options').discord_options.prefix}help`, {
             type: "WATCHING"
         }),1000 )
 
