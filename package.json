@@ -1,0 +1,29 @@
+{
+  "name": "factions_bot2.0",
+  "version": "1.9.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Beastmasterrr",
+  "license": "ISC",
+  "dependencies": {
+    "canvacord": "^5.2.3",
+    "chalk": "^4.1.2",
+    "cpu-stat": "^2.0.1",
+    "discord-backup": "^3.0.1",
+    "discord-giveaways": "github:Androz2091/discord-giveaways#discord.js-v13",
+    "discord-logs": "^2.0.1",
+    "discord.js": "^13.1.0",
+    "js-yaml": "^4.1.0",
+    "mineflayer": "^3.6.0",
+    "mineflayer-pathfinder": "^1.6.3",
+    "mineflayer-tps": "^1.0.1",
+    "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
+    "ms": "^2.1.3",
+    "node-hwid": "^0.1.0",
+    "quick.db": "^7.1.3"
+  }
+}

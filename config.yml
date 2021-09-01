@@ -18,7 +18,7 @@
 
 
 # Paste your discord bot token in-between the double quotes (Make sure you've watched the video on)
-discord_bot_token: "ODgwNjQxMjA2NzI2NTYxODUz.YShPCQ.XbNbMSJdO6k6VA2nztf8iogTHsI"
+discord_bot_token: "ODQyNjk5NTg5Mjk5NjAxNDI4.YJ5HJg.eys3p8s_q-h5BHqWJ45Bwtfg4d8"
 
 
 # Create a role called "Factions bot" or "Developer" and paste it's id here.
@@ -40,5 +40,30 @@ password: 'Aylan2501.'
 auth: 'mojang'
 
 
-# Embed color
+# Embed color, Only hex codes https://htmlcolorcodes.com/color-picker/
 embed_color: "#F1C40F"
+
+
+
+############################################################
+# +------------------------------------------------------+ #
+# |                     Application                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+
+application_settings:
+  applications_channel: "879762316936220742" # Submitted applications gets sent here
+  questions: 
+    - "What is your IGN?"
+    - "What is your age?"
+    - "What is your timezone?"
+    - "What is your estimated playtime?"
+    - "State your previous factions"
+    - "Are you able to perform voice calls?"
+    - "Do you have any knowledge with cannoning or patching?"
+    - "Explain how to patch against a non ap cannon"
+    - "Explain how to patch against a ap cannon"
+    - "Explain what is buffer-check and how you do it"
+  accepted_response: "Hey your application was reviewed by the management, and we would like to inform you that your application has been accepted.\nPlease message a Co-leader to get started with your interview."
+  rejected_response: "Hey your application was reviewed by the management, and we are sorry to inform you that your application has been rejected."

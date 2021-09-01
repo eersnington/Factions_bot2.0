@@ -34,7 +34,7 @@ module.exports = {
             });
 
             let imagesCommands = []
-            let imagesFolder = fs.readdirSync(`./commands/fun`);
+            let imagesFolder = fs.readdirSync(`./commands/images`);
             imagesFolder.forEach(file => {
                 fileName = String(file).split('.')[0]
                 imagesCommands.push(`**${fileName} ➜ ** ${client.commands.get(fileName).description}`)
@@ -52,17 +52,18 @@ module.exports = {
                 .setAuthor(`Help Menu`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*Click on the button that corresponds to your command help needs!*
                 \n🛠️ **» Utility Commands**\n💥 **» Faction Commands**\n🖥️ **» In-game Commands**\n🎪 **» Fun Commands**\n
-                **Note: ** *Some of these categories contain sub categories!*
-                `)
+                **Note: ** *Some of these categories contain sub categories!*`)
                 .setThumbnail(message.guild.iconURL())
                 .setColor(client.config.embed_color)
                 .setTimestamp()
                 .setFooter(`Glowstone Bot | ${message.guild.name}`);
+
+            if (!client.db.get('options').discord_options.server_chat_channel) noArguments.addField(`⚠️ Alert:`, `Hey I noticed you haven't done the setup yet.\n Get started with \`${client.db.get('options').discord_options.prefix}setup\`` )
             const utilityEmbed = new Discord.MessageEmbed()
                 .setAuthor(`🛠️  Utility Menu`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*List of utility commands!*
                 \n${utilitiesCommands.join(`\n`)}
-                \n**Note: ** *Type \`${client.config.bot.prefix}help [cmd]\` for command details*
+                \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
                 `)
                 .setThumbnail(message.guild.iconURL())
                 .setColor(client.config.embed_color)
@@ -73,7 +74,7 @@ module.exports = {
                 .setAuthor(`💥 Factions Commands`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*List of Factions commands!*
                 \n${factionsCommands.join(`\n`)}
-                \n**Note: ** *Type \`${client.config.bot.prefix}help [cmd]\` for command details*
+                \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
                 `)
                 .setThumbnail(message.guild.iconURL())
                 .setColor(client.config.embed_color)
@@ -84,7 +85,7 @@ module.exports = {
                 .setAuthor(`🖥️ **» In-game Commands`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*List of admin commands!*
                 \n${ingameCommands.join(`\n`)}
-                \n**Note: ** *Type \`${client.config.bot.prefix}help [cmd]\` for command details*
+                \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
                 `)
                 .setThumbnail(message.guild.iconURL())
                 .setColor(client.config.embed_color)
@@ -95,7 +96,7 @@ module.exports = {
                 .setAuthor(`🎪 Fun Menu`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*List of fun commands!*
                 \n🕹️ **» Game Commands**\n🌆 **» Image Commands**
-                \n**Note: ** *Type \`${client.config.bot.prefix}help [cmd]\` for command details*
+                \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
                 `)
                 .setThumbnail(message.guild.iconURL())
                 .setColor(client.config.embed_color)
@@ -106,7 +107,7 @@ module.exports = {
                 .setAuthor(`🕹️ Games Menu`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*List of community commands!*
                 \n${gamesCommands.join(`\n`)}
-                \n**Note: ** *Type \`${client.config.bot.prefix}help [cmd]\` for command details*
+                \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
                 `)
                 .setThumbnail(message.guild.iconURL())
                 .setColor(client.config.embed_color)
@@ -117,7 +118,7 @@ module.exports = {
                 .setAuthor(`🌆 Images Menu`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*List of image commands!*
                 \n${imagesCommands.join(`\n`)}
-                \n**Note: ** *Type \`${client.config.bot.prefix}help [cmd]\` for command details*
+                \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
                 `)
                 .setThumbnail(message.guild.iconURL())
                 .setColor(client.config.embed_color)
@@ -216,9 +217,9 @@ module.exports = {
                     .setAuthor(`Command Info » ${command.name}`, message.guild.iconURL({ dynamic: true }))
                     .addField('❯ Name', `${command.name}`, true)
                     .addField('❯ Aliases', `\`${command.aliases.join('\`, \` ') ? command.aliases : "No Aliases"}\``)
-                    .addField('❯ Usage', `\`${client.config.bot.prefix}${command.usage}\``, true)
+                    .addField('❯ Usage', `\`${client.db.get('options').discord_options.prefix}${command.usage}\``, true)
                     .addField('❯ Description', `${command.description}`)
-                    .addField('❯ User Roles', `${((rolesReq1+rolesReq2).length > 2) ? rolesReq1+rolesReq2: "\`No Role Permissions\`"}`)
+                    .addField('❯ User Roles', `${((rolesReq1+rolesReq2).length > 2) ? `${rolesReq1}, ${rolesReq2}`: "\`No Role Permissions\`"}`)
                     .addField('❯ User Permissions', `\`${command.requiredPerms.join('\`, \` ') ? command.requiredPerms : "No User Permissions"}\``)
                     .setColor(client.config.embed_color)
                 message.channel.send({embeds: [foundEmbed]});

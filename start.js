@@ -12,7 +12,7 @@ const client = new Discord.Client({intents});
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 client.config = YAML.load(fs.readFileSync("config.yml"));
-client.db = require('quick.db');
+client.db = require('quick.db')
 client.toggle = false;
 
 hwid({
@@ -37,14 +37,14 @@ hwid({
                 }else{
                     client.toggle = true
                     console.log(chalk.blue("[Glowstone] » Authentication Successful"))
-                    return client.login(String(client.config.discord_bot_token)).catch((err)=> {
+                    
+                    return client.login(client.config.discord_bot_token).catch((err)=> {
                         console.log(chalk.red("[Glowstone] Discord bot token is Invalid! (Make sure you've enabled privledged intents in Devs Portal for your bot)"))
                         console.log(err)
                     })
                 }
 
             }catch (err){
-
                 console.log(chalk.hex("#e12120")("[Glowstone] » Authentication Failed"))
                 process.exit(0)
             }
@@ -53,16 +53,17 @@ hwid({
     })
 })
 
+logs(client);
 
 if (!client.db.get('options')) {
-    client.options = client.db.set('options',{
+    client.db.set('options',{
     color: client.config.embed_color,
     //mineflayer variables
     online: false,
     config: {mc_username: client.config.username, mc_password: client.config.password,  auth: client.config.auth}, 
-    minecraft_options:{bot: null, version: '1.8.9', ip: "pvp.thearchon.net", join_command: "onyx"},
+    minecraft_options:{bot: null, version: '1.8.9', ip: "pvp.thearchon.net", join_command: "/onyx"},
     //discord bot variables
-    discord_options: {prefix: '*', developer_role: client.config.developer_role_id, member_role: null, server_chat_channel: null, weewoo_channel: null, buffer_channel: null,
+    discord_options: {prefix: '*', developer_role: client.config.developer_role_id, server_chat_channel: null, weewoo_channel: null, buffer_channel: null,
     ftop_channel: null, fptop_channel: null, flist_channel: null, alerts_channel: null, whitelist_channel: null, logs_channel: null, interval: 5},
     //members
     players: {
@@ -72,27 +73,31 @@ if (!client.db.get('options')) {
     //checks data
     checks: {buffer_check_count: 0, buffer_interval: null, members:{}},
     //chat data
-    server_chat: {toggle: true, data: []},
-    ftop: {toggle: false, data: []},
-    fptop: {toggle: false, data: []},
-    flist: {toggle: false, data: []},
+    server_chat: {toggle: true},
+    ftop: {toggle: false},
+    fptop: {toggle: false},
+    flist: {toggle: false},
     cegg_alert: false,
     tnt_alert: false,
     logs: false,
-    temp_uuid: {},
-    commands: {},
     macros: {},
     playtime:{},
-    vanish: {track: false, count: 0, list: []}
+    vanish: {track: false, count: 0}
     })
 }else{
-    client.options = client.db.get('options')
-}
+    let json = client.db.get('options');
 
-logs(client);
+    json.color = client.config.embed_color;
+    json.config.mc_username =  client.config.username;
+    json.config.mc_password = client.config.password;
+    json.config.auth = client.config.auth;
+    json.discord_options.developer_role = client.config.developer_role_id;
+
+    client.db.set('options', json)
+}
 
 // HANDLERS
 require(`./handlers/command`)(client, Discord);
-require(`./handlers/events`)//(client, Discord);
-require(`./handlers/giveaways`)//(client, Discord);
+require(`./handlers/events`)(client, Discord);
+require(`./handlers/giveaways`)(client, Discord);
 require(`./handlers/automod`)//(client, Discord);
