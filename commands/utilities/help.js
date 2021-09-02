@@ -44,7 +44,7 @@ module.exports = {
             let ingameFolder = fs.readdirSync(`./ingame_commands`);
             ingameFolder.forEach(file => {
                 fileName = String(file).split('.')[0]
-                ingameCommands.push(`**${fileName} ➜ ** ${client.commands.get(fileName).description}`)
+                ingameCommands.push(`**${fileName} ➜ ** ${client.ingame_commands.get(fileName).description}`)
             });
             
       
@@ -83,7 +83,7 @@ module.exports = {
                 
             const ingameEmbed = new Discord.MessageEmbed()
                 .setAuthor(`🖥️ **» In-game Commands`, message.guild.iconURL({ dynamic: true }))
-                .setDescription(`*List of admin commands!*
+                .setDescription(`*List of in-game commands!*
                 \n${ingameCommands.join(`\n`)}
                 \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
                 `)
@@ -209,6 +209,7 @@ module.exports = {
             return message.channel.send({ embeds: [noArguments], components: [row]});
         } else {
             const command = client.commands.get(args[0].toLowerCase()) || client.commands.find(command => command.aliases.includes(args[0]));
+            const ingame_command = client.ingame_commands.get(args[0].toLowerCase()) || client.ingame_commands.find(command => command.aliases.includes(args[0]));
             if (command) {
                 let rolesReq1 = (command.dev) ? `\`DEVELOPER\``: ""
                 let rolesReq2 = (command.whitelist) ? `\`WHITELIST\``: ""
@@ -221,6 +222,22 @@ module.exports = {
                     .addField('❯ Description', `${command.description}`)
                     .addField('❯ User Roles', `${((rolesReq1+rolesReq2).length > 2) ? `${rolesReq1}, ${rolesReq2}`: "\`No Role Permissions\`"}`)
                     .addField('❯ User Permissions', `\`${command.requiredPerms.join('\`, \` ') ? command.requiredPerms : "No User Permissions"}\``)
+                    .addField('\u200B', `*Parameters in <> angular brackets are required*\n*Parameters in [] square brackets are optional*`)
+                    .setColor(client.config.embed_color)
+                message.channel.send({embeds: [foundEmbed]});
+            }
+            if (ingame_command) {
+                let rolesReq1 = (command.member) ? `\`MEMBER\``: ""
+                let rolesReq2 = (command.whitelist) ? `\`WHITELIST\``: ""
+
+                const foundEmbed = new Discord.MessageEmbed()
+                    .setAuthor(`Ingame-Command Info » ${command.name}`, message.guild.iconURL({ dynamic: true }))
+                    .addField('❯ Name', `${command.name}`, true)
+                    .addField('❯ Aliases', `\`${command.aliases.join('\`, \` ') ? command.aliases : "No Aliases"}\``)
+                    .addField('❯ Usage', `\`${client.db.get('options').discord_options.prefix}${command.usage}\``, true)
+                    .addField('❯ Description', `${command.description}`)
+                    .addField('❯ Linked', `${((rolesReq1+rolesReq2).length > 2) ? `${rolesReq1}, ${rolesReq2}`: "\`Link not required\`"}`)
+                    .addField('\u200B', `*Parameters in <> angular brackets are required*\n*Parameters in [] square brackets are optional*`)
                     .setColor(client.config.embed_color)
                 message.channel.send({embeds: [foundEmbed]});
             }

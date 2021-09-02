@@ -139,6 +139,7 @@ function ftop_toggle(client, message){
                 client.data.ftop = []
                 
                 embed.setTitle(`🏆 F-top Value \`\`${client.db.get('options').minecraft_options.ip}\`\``)
+                .setTimestamp()
                 .setFooter(`Glowstone Bot | ${message.guild.name}`);
                 ftop_chat.send({embeds:[embed]});
             }, 500)
@@ -198,6 +199,7 @@ function fptop_toggle(client, message){
                 client.data.fptop = []
 
                 embed.setTitle(`🏆 F-ptop Value \`\`${client.db.get('options').minecraft_options.ip}\`\``)
+                .setTimestamp()
                 .setFooter(`Glowstone Bot | ${message.guild.name}`);
                 fptop_chat.send({embeds: [embed]});
             }, 500)
@@ -257,6 +259,7 @@ function flist_toggle(client, message){
                 client.data.flist = []
 
                 embed.setTitle(`👥 F-List \`\`${client.db.get('options').minecraft_options.ip}\`\``)
+                .setTimestamp()
                 .setFooter(`Glowstone Bot | ${message.guild.name}`);
                 flist_chat.send({embeds:[embed]});
             }, 500)

@@ -25,6 +25,7 @@ module.exports = {
                 client.data.flist = []
 
                 embed.setTitle(`👥 F-List \`\`${options.minecraft_options.ip}\`\``)
+                .setTimestamp()
                 .setFooter(`Glowstone Bot | ${message.guild.name}`);
                 message.channel.send({embeds:[embed]});
             }, 500)

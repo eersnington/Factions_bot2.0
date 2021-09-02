@@ -23,6 +23,7 @@ module.exports = {
                 let reply = (options.server_chat.toggle) ? embed.setDescription(`\`\`\`yaml\n${fwho_data.join('\n')}\`\`\``) : embed.setDescription(`There was an error in trying to retrieve the data.`)
 
                 embed.setTitle(`📜 F-who \`\`${options.minecraft_options.ip}\`\``)
+                .setTimestamp()
                 .setFooter(`Glowstone Bot | ${message.guild.name}`);
                 message.channel.send({embeds:[embed]});
             }, 500)

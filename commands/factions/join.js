@@ -1,7 +1,6 @@
 const mineflayer = require("mineflayer");
 const Discord = require('discord.js')
 const chalk = require('chalk');
-const fs = require('fs');
 const performance = require('perf_hooks').performance;
 const tpsPlugin = require('mineflayer-tps')(mineflayer);
 
@@ -10,7 +9,6 @@ let relog_interval;
 let bot;
 
 const botEmbed = new Discord.MessageEmbed();
-const commandFiles = fs.readdirSync('./ingame_commands').filter(file => file.endsWith('.js'));
 
 const tnt_cooldown = new Set();
 const cegg_cooldown = new Set();
@@ -40,14 +38,8 @@ module.exports = {
             .setFooter('Glowstone Bot | Glowstone-Development');
             return message.channel.send({embeds:[embed]});
         }
-    
-        for (const file of commandFiles) {
-        const command = require(`../../ingame_commands/${file}`);
-        const fileName = file.substring(0, file.length-3);
-        options.commands[fileName] = command;
-        }
         
-        main(options, message, client, Discord);
+        main(options, message, client);
   
     }
 }
@@ -56,7 +48,7 @@ module.exports = {
  * Mineflayer Bot Main 
  */
 
- function main(options, message, client, db) {
+ function main(options, message, client) {
 
     client.data = {ftop: [], fptop: [], flist: [], server_chat: []}
 
@@ -135,11 +127,18 @@ module.exports = {
         
         const main_match = matches[0]
         const player = main_match[1]
-        const command = main_match[2]
+        const commandName = main_match[2]
         const args = main_match[3]
+
+        const command = client.ingame_commands.get(commandName)|| client.ingame_commands.find(command => command.aliases.includes(commandName));
         
-        if(!Object.keys(options.commands).includes(command))return
-        options.commands[command].execute(message, client, player, args, options)
+        if(!command)return
+    
+        if (command.whitelist && !command.member && !Object.keys(client.db.get('options').players.whitelist).includes(player)) return client.bot.chat("You have to whitelistlink in the Discord to perform this command!")
+        if (command.whitelist && command.member 
+            && !Object.keys(client.db.get('options').players.faction).includes(player) && !Object.keys(client.db.get('options').players.whitelist).includes(player)) return client.bot.chat("You have to memberlink or whitelistlink in the Discord to perform this command!")
+
+        command.execute(client, message, player, args);
     });
 
     bot.on("chat:deposit", (matches) => {
@@ -278,7 +277,6 @@ module.exports = {
   
     bot.on("playerLeft", (player)=>{
         if (Object.keys(client.db.get('options').players.whitelist).includes(player.username) || Object.keys(client.db.get('options').players.faction).includes(player.username)){
-          
           if(playtime.has(player.username)){
   
             playtime.delete(player.username)
@@ -313,6 +311,7 @@ module.exports = {
   
             tntEmbed.setTitle(`💣 TNT Shot Alert`)
             .setColor(options.color)
+            .setTimestamp()
             .setThumbnail("https://art.pixilart.com/12f55dd3412c81c.png")
             .setDescription(`Tnt shot detected near me\n**Coords:** (${parseFloat(data.x).toFixed(2)}, ${parseFloat(data.y).toFixed(2)}, ${parseFloat(data.z).toFixed(2)})`)
             .setFooter(`Glowstone Bot | ${message.guild.name}`);
@@ -333,6 +332,7 @@ module.exports = {
   
             ceggEmbed.setTitle(`💣 Cegg Egg Alert`)
             .setColor(options.color)
+            .setTimestamp()
             .setThumbnail("https://i.pinimg.com/originals/84/3b/6b/843b6b77f46c1c3a69091d13fa9593d7.jpg")
             .setDescription(`Possible free-cam cegg detected\n**Coords:** (${parseFloat(data.x).toFixed(2)}, ${parseFloat(data.y).toFixed(2)}, ${parseFloat(data.z).toFixed(2)})`)
             .setFooter(`Glowstone Bot | ${message.guild.name}`);

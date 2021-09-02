@@ -24,6 +24,7 @@ module.exports = {
                 client.data.ftop = []
                 
                 embed.setTitle(`🏆 F-top Value \`\`${options.minecraft_options.ip}\`\``)
+                .setTimestamp()
                 .setFooter(`Glowstone Bot | ${message.guild.name}`);
                 message.channel.send({embeds:[embed]});
             }, 500)

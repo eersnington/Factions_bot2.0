@@ -1,5 +1,6 @@
 const chalk = require("chalk")
 module.exports = (Discord, client, message) => {
+    if (message.channel instanceof Discord.DMChannel) return
     const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
 
     if (!client.toggle){
@@ -32,7 +33,7 @@ module.exports = (Discord, client, message) => {
 
     if (!message.member.roles.cache.has(client.db.get('options').discord_options.developer_role)){
 
-        if(command.dev && !message.member.roles.cache.has(client.db.get('options').discord_options.developer_role)){
+        if(command.dev && !command.whitelist){
             errEmbed.setDescription(`You do not have <@${client.db.get('options').discord_options.developer_role}> to execute this command!`);
             return message.channel.send({embeds:[errEmbed]});
         }

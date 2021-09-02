@@ -1,4 +1,4 @@
-const chalk = require("chalk")
+const chalk = require("chalk");
 const Discord = require("discord.js");
 const logs = require('discord-logs');
 const fs = require("fs");
@@ -10,10 +10,12 @@ const intents = new Discord.Intents(32727);
 const client = new Discord.Client({intents});
 
 client.commands = new Discord.Collection();
+client.ingame_commands = new Discord.Collection();
 client.events = new Discord.Collection();
 client.config = YAML.load(fs.readFileSync("config.yml"));
 client.db = require('quick.db')
 client.toggle = false;
+client.temp_uuid = {}
 
 hwid({
     hash: true, 
@@ -82,7 +84,6 @@ if (!client.db.get('options')) {
     logs: false,
     macros: {Macros1 : {content: "/ff DON'T SLACK CANE", interval : "30"}},
     playtime:{},
-    vanish: {track: false, count: 0}
     })
 }else{
     let json = client.db.get('options');

@@ -3,7 +3,7 @@ const chalk = require('chalk');
 module.exports = {
     name : 'shield',
     description : 'Turn on/off shield alerts',
-    usage: 'shield <on/off>',
+    usage: 'shield [on/off]',
     aliases: [],
     whitelist: true,
     dev: true,
@@ -51,6 +51,7 @@ function buffer_logic(client, status, message, Discord) {
 
     if (status == "off"){
         shieldEmbed.setTitle(`🛡️ Shield is now OFF`)
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
         .setThumbnail("https://eu.mc-api.net/v3/server/favicon/" + options.minecraft_options.ip)
         .setFooter(`Glowstone Bot | ${message.guild.name}`)
         .setDescription('☢️ **You will now get regular wall/buffer check alerts**\n**Priority:** DO NOT FOLD ☠️')
@@ -71,14 +72,14 @@ function buffer_logic(client, status, message, Discord) {
                 clearInterval(options.checks.buffer_interval);
                 return buffer_chat.send({embeds:[shieldEmbed]}); 
             }
-            if (options.checks.buffer_check_count == 0){
-                client.bot.chat(`${options.checks.buffer_check_count} checks since the last ${options.discord_options.interval} minutes!! Do not slack!!`)
-            } else if (options.checks.buffer_check_count == 1){
-                client.bot.chat(`There has only been ${options.checks.buffer_check_count} check since the last ${options.discord_options.interval} minutes!`)
+            if (client.buffer_check_count == 0){
+                client.bot.chat(`${client.buffer_check_count} checks since the last ${options.discord_options.interval} minutes!! Do not slack!!`)
+            } else if (client.buffer_check_count == 1){
+                client.bot.chat(`There has only been ${client.buffer_check_count} check since the last ${options.discord_options.interval} minutes!`)
             }else {
-                client.bot.chat(`There have been ${options.checks.buffer_check_count} checks since the last ${options.discord_options.interval} minutes!`)
+                client.bot.chat(`There have been ${client.buffer_check_count} checks since the last ${options.discord_options.interval} minutes!`)
             }
-            options.checks.buffer_check_count = 0
+            client.buffer_check_count = 0
             setTimeout(()=>client.bot.chat(`!!! Wall/Buffer Check Alert !!! Check walls/buffers right now and do ${options.discord_options.prefix}checked N/S/E/W`), 2000);
             
         }, parseInt(client.db.get("options").discord_options.interval)*60000)

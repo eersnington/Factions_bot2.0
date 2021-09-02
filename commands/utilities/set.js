@@ -73,12 +73,12 @@ module.exports = {
                     value = (args[1].match(/(\d+)/))[0];
                 }else{
                     value = args[1];
-                    if (options.minecraft_options.bot !=null){
-                        options.minecraft_options.bot.removeChatPattern("facChat1")
+                    if (client.bot !=null){
+                        client.bot.removeChatPattern("facChat1")
                         let chatRegex = new RegExp(`^(\\*|\\*\\*|\\*\\*\\*|\\+|\\+\\+|\\-|\\-\\-|@)(\\w+): \\${value}(\\w+)(.*)`);
                         let mapleCraftRegex = new RegExp(`^FACTION: (\\*|\\*\\*|\\*\\*\\*|\\+|\\+\\+|\\-|\\-\\-)(\\w+): \\${value}(\\w+)(.*)`);
-                        options.minecraft_options.bot.addChatPattern("facChat1", chatRegex , { parse: true});
-                        options.minecraft_options.bot.addChatPattern("facChat1", mapleCraftRegex , { parse: true});
+                        client.bot.addChatPattern("facChat1", chatRegex , { parse: true});
+                        client.bot.addChatPattern("facChat1", mapleCraftRegex , { parse: true});
                     }
                 }
 

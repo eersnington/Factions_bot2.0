@@ -22,7 +22,7 @@ module.exports = {
                 
             client.bot.chat(`/tpyes`)
             setTimeout(()=> {
-                let tpa = options.server_chat.data
+                let tpa = client.data.server_chat
                 let reply = (options.server_chat.toggle) ? embed.setDescription(`:white_check_mark: ${message.author.tag}\`\n\`\`\`yaml\n${tpa.join("\n")}\`\`\``) : embed.setDescription(`:white_check_mark: ${message.author.tag}`)
 
                 embed.setColor(options.color)

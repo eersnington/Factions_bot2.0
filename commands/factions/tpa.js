@@ -22,7 +22,7 @@ module.exports = {
                 
             client.bot.chat(`/tpa ${chat}`)
             setTimeout(()=> {
-                let tpa = options.server_chat.data
+                let tpa = client.data.server_chat
                 let reply = (options.server_chat.toggle) ? embed.setDescription(`:white_check_mark: ${message.author.tag} attempted to send a tpa request to \`${chat}\`\n\`\`\`yaml\n${tpa.join("\n")}\`\`\``) : embed.setDescription(`:white_check_mark: ${message.author.tag} attempted to send a tpa request to \`${chat}\``)
 
                 embed.setColor(options.color)

@@ -2,7 +2,7 @@ const chalk = require('chalk');
 
 module.exports = {
     name : 'weewoo',
-    description : 'Initiate a weewoo',
+    description : 'Send a weewoo alert',
     usage: 'weewoo <message>',
     aliases: [],
     whitelist: true,
