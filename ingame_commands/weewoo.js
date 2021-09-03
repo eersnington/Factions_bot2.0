@@ -16,6 +16,7 @@ module.exports = {
         .setColor(options.color);
 
         let channel = client.channels.cache.get(options.discord_options.weewoo_channel);
+        const chat = args.substring(1);
 
         if(!channel){
             embed.setTitle('⁉️ Missing Channel')
@@ -30,7 +31,7 @@ module.exports = {
         .setThumbnail("https://eu.mc-api.net/v3/server/favicon/" + options.minecraft_options.ip)
         .setDescription(`**${player}** called weewoo! JOIN NOW!\n
             **Ip:** \`${options.minecraft_options.ip}\`\n
-                Message from **${message.author.tag}:**  \`\`\`diff\n- ${chat}\`\`\``)
+                Message from **${player}:**  \`\`\`diff\n- ${chat}\`\`\``)
         .setFooter('Glowstone Bot | Glowstone-Development');
 
         return channel.send({content: "@everyone 🆘  WEEWOO 📢!!!", embeds: [embed]});

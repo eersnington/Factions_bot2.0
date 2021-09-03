@@ -259,15 +259,16 @@ module.exports = {
                 message.channel.send({embeds: [foundEmbed]});
             }
             if (ingame_command) {
-                let rolesReq1 = (command.member) ? `\`MEMBER\``: ""
-                let rolesReq2 = (command.whitelist) ? `\`WHITELIST\``: ""
+
+                let rolesReq1 = (ingame_command.member) ? `\`MEMBER\``: ""
+                let rolesReq2 = (ingame_command.whitelist) ? `\`WHITELIST\``: ""
 
                 const foundEmbed = new Discord.MessageEmbed()
-                    .setAuthor(`Ingame-Command Info » ${command.name}`, message.guild.iconURL({ dynamic: true }))
-                    .addField('❯ Name', `${command.name}`, true)
-                    .addField('❯ Aliases', `\`${command.aliases.join('\`, \` ') ? command.aliases : "No Aliases"}\``)
-                    .addField('❯ Usage', `\`${client.db.get('options').discord_options.prefix}${command.usage}\``, true)
-                    .addField('❯ Description', `${command.description}`)
+                    .setAuthor(`Ingame-Command Info » ${ingame_command.name}`, message.guild.iconURL({ dynamic: true }))
+                    .addField('❯ Name', `${ingame_command.name}`, true)
+                    .addField('❯ Aliases', `\`${ingame_command.aliases.join('\`, \` ') ? ingame_command.aliases : "No Aliases"}\``)
+                    .addField('❯ Usage', `\`${client.db.get('options').discord_options.prefix}${ingame_command.usage}\``, true)
+                    .addField('❯ Description', `${ingame_command.description}`)
                     .addField('❯ Linked', `${((rolesReq1+rolesReq2).length > 2) ? `${rolesReq1}, ${rolesReq2}`: "\`Link not required\`"}`)
                     .addField('\u200B', `*Parameters in <> angular brackets are required*\n*Parameters in [] square brackets are optional*`)
                     .setColor(client.config.embed_color)

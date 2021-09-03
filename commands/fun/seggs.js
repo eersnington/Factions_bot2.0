@@ -26,7 +26,14 @@ module.exports = {
 
         role = message.guild.roles.cache.find(r => r.name.toLowerCase() === 'sussy baka')
 
-        if (role) message.member.roles.add(role)
+        try{
+
+            if (role) message.member.roles.add(role)
+
+        }catch(err){
+
+            message.channel.send("I don't have the required perms to add a role. (Make sure my role is at the top)")
+        }
 
         let embed  = new Discord.MessageEmbed()
         embed.setColor(options.color)

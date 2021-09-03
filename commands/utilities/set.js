@@ -77,8 +77,10 @@ module.exports = {
                         client.bot.removeChatPattern("facChat1")
                         let chatRegex = new RegExp(`^(\\*|\\*\\*|\\*\\*\\*|\\+|\\+\\+|\\-|\\-\\-|@)(\\w+): \\${value}(\\w+)(.*)`);
                         let mapleCraftRegex = new RegExp(`^FACTION: (\\*|\\*\\*|\\*\\*\\*|\\+|\\+\\+|\\-|\\-\\-)(\\w+): \\${value}(\\w+)(.*)`);
+                        let conquerMcRegex = new RegExp(`^\\[factions] \\[(\\*|\\*\\*|\\*\\*\\*|\\+|\\+\\+|\\-|\\-\\-)] (\\w+): \\${value}(\\w+)(.*)`);
                         client.bot.addChatPattern("facChat1", chatRegex , { parse: true});
                         client.bot.addChatPattern("facChat1", mapleCraftRegex , { parse: true});
+                        client.bot.addChatPattern("facChat1", conquerMcRegex , { parse: true});
                     }
                 }
 

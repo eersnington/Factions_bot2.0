@@ -95,9 +95,11 @@ module.exports = {
     
             let chatRegex = new RegExp(`^(\\*|\\*\\*|\\*\\*\\*|\\+|\\+\\+|\\-|\\-\\-|@)(\\w+): \\${options.discord_options.prefix}(\\w+)(.*)`);
             let mapleCraftRegex = new RegExp(`^FACTION: (\\*|\\*\\*|\\*\\*\\*|\\+|\\+\\+|\\-|\\-\\-)(\\w+): \\${options.discord_options.prefix}(\\w+)(.*)`);
+            let conquerMcRegex = new RegExp(`^\\[factions] \\[(\\*|\\*\\*|\\*\\*\\*|\\+|\\+\\+|\\-|\\-\\-)] (\\w+): \\${options.discord_options.prefix}(\\w+)(.*)`);
     
             bot.addChatPattern("facChat1", chatRegex , { parse: true});
             bot.addChatPattern("facChat1", mapleCraftRegex , { parse: true});
+            bot.addChatPattern("facChat1", conquerMcRegex , { parse: true});
             bot.addChatPattern("deposit", /^(\*|\*\*|\*\*\*|\+|\+\+|\-|\-\-)(\w+) gave \$((?=.)(\d{1,3}(,\d{3})*)?(\.\d+)?) to your faction\./, { parse: true});
             bot.addChatPattern("deposit", /^(\*|\*\*|\*\*\*|\+|\+\+|\-|\-\-)(\w+) gave ((?=.)(\d{1,3}(,\d{3})*)?(\.\d+)?) to your faction\./, { parse: true});
             bot.addChatPattern("paydeposit", /\$((?=.)(\d{1,3}(,\d{3})*)?(\.\d+)?) has been received from (\w+)\./, { parse: true});

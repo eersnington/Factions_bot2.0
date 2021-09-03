@@ -16,30 +16,41 @@ module.exports = {
 
         const chat = args.substring(1);
 
-        button_click(chat, client);
+        lever_flick(chat, client);
 
     }
 }
 
-function button_click(args, client) {
-    const mcData = require('minecraft-data')(client.bot.version);
+function lever_flick(args, client) {
+    const mcData = require('minecraft-data')(client.bot.version)
     const block = client.bot.findBlock({
-        matching: mcData.blocksByName["stone_button"].id,
-        maxDistance: 4,
-        count: 1
+      matching: mcData.blocksByName["lever"].id,
+      maxDistance: 4,
+      count: 1
     });
     if (!block) {
-        return client.bot.chat("Button is too far (max reach is 3 blocks)");
+        return client.bot.chat("No lever near me");
     }
-    if (args == ""){
+    const parameters = args.split(" ") 
+    
+    if (parameters[0] == ""){
         client.bot.activateBlock(block);
-        client.bot.chat(`Fired!`);
-    }else{
-        let time = parseFloat(args);
-        let button_spam;
-        client.bot.chat(`Button spamming for ${time} seconds!`);
-        setTimeout(()=> clearInterval(button_spam), (time*1000))
-        button_spam = setInterval(()=> client.bot.activateBlock(block), 100);
+        return client.bot.chat(`Levered!`)
+    }
+    
+    if (parameters.length != 3){
+        return client.bot.chat(`Incorrect Usage. Please check for command usage in discord with ${options.discord_options.prefix}help`);
         
+    }else {
+        const cannon_speed = parseFloat(parameters[0])
+        const tnt_amount = parseInt(parameters[1])
+        const pulsed = parseInt(parameters[2])
+
+        client.bot.chat(`Safe Clocked! Cannon-speed: ${cannon_speed}, Tnt-filled: ${tnt_amount}, Pulsed: ${pulsed}`);
+        client.bot.activateBlock(block);
+        setTimeout(()=> {
+            client.bot.activateBlock(block)
+            client.bot.chat(`Deactivated Cannon! Out of tnt!!`);
+        }, ((tnt_amount-pulsed)/pulsed)*cannon_speed*1000)
     }
 }
