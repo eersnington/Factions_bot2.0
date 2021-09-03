@@ -1,5 +1,5 @@
 {
-  "name": "Factions bot",
+  "name": "factions-bot",
   "version": "2.0.0",
   "description": "Factions bot made by Glowstone Development https://discord.gg/pYXsJxkBU3",
   "main": "index.js",
