@@ -39,7 +39,7 @@ module.exports = (Discord, client, message) => {
         }
 
         if (command.whitelist && !Object.keys(client.db.get('options').players.whitelist).includes(message.member.id)){
-            errEmbed.setDescription(`You do not have <@${client.db.get('options').discord_options.developer_role}> nor you're a whitelisted member to execute this command!`);
+            errEmbed.setDescription(`You do not have <@${client.db.get('options').discord_options.developer_role}> nor a whitelisted member to execute this command!`);
             return message.channel.send({embeds:[errEmbed]});
         }
 

@@ -1,7 +1,7 @@
 {
-  "name": "factions_bot2.0",
-  "version": "1.9.1",
-  "description": "",
+  "name": "Factions bot",
+  "version": "2.0.0",
+  "description": "Factions bot made by Glowstone Development https://discord.gg/pYXsJxkBU3",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +16,7 @@
     "discord-giveaways": "github:Androz2091/discord-giveaways#discord.js-v13",
     "discord-logs": "^2.0.1",
     "discord.js": "^13.1.0",
+    "djs-games": "^2.0.11",
     "got": "^11.8.2",
     "js-yaml": "^4.1.0",
     "mineflayer": "^3.6.0",

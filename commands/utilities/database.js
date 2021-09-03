@@ -67,31 +67,40 @@ module.exports = {
             if (!Object.keys(available_options).includes(parameter)){
                 
                 errEmbed.setDescription(`⚠️ The option \`${parameter}\` is invalid`)
-                return message.channel.send({emeds: [errEmbed]});
+                return message.channel.send({embeds: [errEmbed]});
             }
 
             let newJson = client.db.get('options');
 
             if(parameter == "checks"){
-                newJson.checks.members["PlaceholderPlayer"] = 0
+
+                newJson.checks.members = {}
             }else if (parameter == "deposits"){
-                newJson.bank.members["PlaceholderPlayer"] = 0
+
+                newJson.bank.members = {}
             }else if (parameter == "macros"){
+
+                newJson.macros = {}
                 newJson.macros["Macros1"] = {"content": "/ff DON'T SLACK CANE", "interval" : "1"}
             }else if (parameter == "playtime"){
-                newJson.playtime["PlaceholderPlayer"] = 0
+
+                newJson.playtime= {}
             }
             
             else if (parameter == "members"){
-                newJson.players.faction["PlaceholderPlayer"] ='270904126974590976'
+
+                newJson.players.faction = {}
             }else if (parameter == "whitelist"){
-                newJson.players.whitelist["PlaceholderPlayer"] ='270904126974590976'
+
+                newJson.players.whitelist = {}
             }else if (parameter == "new_map"){
-                newJson.checks.members["PlaceholderPlayer"] = 0
-                newJson.bank.members["PlaceholderPlayer"] = 0
-                newJson.macros["Macros1"] = {"content": "/ff DON'T SLACK CANE", "interval" : "1"}
-                newJson.playtime["PlaceholderPlayer"] = 0
+                
+                newJson.checks.members = {}
+                newJson.bank.members = {}
+                newJson.playtime = {}
             }
+
+            client.db.set('options', newJson)
 
             dbEmbed.setTitle(`💾  Reset successful`)
             .setDescription(`✅ You have successfully reset the option \`${parameter}\``);

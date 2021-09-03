@@ -25,6 +25,20 @@ module.exports = {
                 fileName = String(file).split('.')[0]
                 factionsCommands.push(`**${fileName} ➜ ** ${client.commands.get(fileName).description}`)
             });
+
+            let modCommands = []
+            let modFolder = fs.readdirSync(`./commands/moderation`);
+            modFolder.forEach(file => {
+                fileName = String(file).split('.')[0]
+                modCommands.push(`**${fileName} ➜ ** ${client.commands.get(fileName).description}`)
+            });
+
+            let funCommands = []
+            let funFolder = fs.readdirSync(`./commands/fun`);
+            funFolder.forEach(file => {
+                fileName = String(file).split('.')[0]
+                funCommands.push(`**${fileName} ➜ ** ${client.commands.get(fileName).description}`)
+            });
             
             let gamesCommands = []
             let gamesFolder = fs.readdirSync(`./commands/games`);
@@ -51,7 +65,7 @@ module.exports = {
             const noArguments = new Discord.MessageEmbed()
                 .setAuthor(`Help Menu`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*Click on the button that corresponds to your command help needs!*
-                \n🛠️ **» Utility Commands**\n💥 **» Faction Commands**\n🖥️ **» In-game Commands**\n🎪 **» Fun Commands**\n
+                \n🛠️ **» Utility Commands**\n💥 **» Faction Commands**\n🖥️ **» In-game Commands**\n🔨 **» Moderation Commands**\n🎪 **» Fun Commands**\n
                 **Note: ** *Some of these categories contain sub categories!*`)
                 .setThumbnail(message.guild.iconURL())
                 .setColor(client.config.embed_color)
@@ -92,9 +106,21 @@ module.exports = {
                 .setTimestamp()
                 .setFooter(`Glowstone Bot | ${message.guild.name}`);
             
+            const modsEmbed = new Discord.MessageEmbed()
+                .setAuthor(`🔨 Moderation Commands`, message.guild.iconURL({ dynamic: true }))
+                .setDescription(`*List of Moderation commands!*
+                \n${modCommands.join(`\n`)}
+                \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
+                `)
+                .setThumbnail(message.guild.iconURL())
+                .setColor(client.config.embed_color)
+                .setTimestamp()
+                .setFooter(`Glowstone Bot | ${message.guild.name}`);
+            
             const funEmbed = new Discord.MessageEmbed()
                 .setAuthor(`🎪 Fun Menu`, message.guild.iconURL({ dynamic: true }))
                 .setDescription(`*List of fun commands!*
+                \n${funCommands.join(`\n`)}
                 \n🕹️ **» Game Commands**\n🌆 **» Image Commands**
                 \n**Note: ** Type \`${client.db.get('options').discord_options.prefix}help [cmd]\` for command details
                 `)
@@ -146,6 +172,11 @@ module.exports = {
                         description: "Commands that you can execute in-game!",
                         emoji: "🖥️"
                     },{
+                        label:"Moderation Commands",
+                        value: "mod",
+                        description: "Commands to help you moderate your discord!",
+                        emoji: "🔨"
+                    },{
                         label:"Fun Commands",
                         value: "fun",
                         description: "Fun and entertaining commands along with minigames!",
@@ -184,6 +215,9 @@ module.exports = {
                     case 'utility':
                         collected.message.edit({embeds: [utilityEmbed]})
                         break;
+                    case 'mod':
+                        collected.message.edit({embeds: [modsEmbed]})
+                        break;
                     case 'fun':
                         collected.message.edit({embeds: [funEmbed], components: [row2]})
                         break;
@@ -202,8 +236,6 @@ module.exports = {
                     default:
                         console.log(`Invalid button!`);
                   }
-                
-
             })
 
             return message.channel.send({ embeds: [noArguments], components: [row]});
