@@ -44,7 +44,7 @@ module.exports = {
             return message.reply({embeds: [cooldownEmbed]})
         }
 
-        let appsChannel = client.channels.cache.get(options.discord_options.alerts_channel);
+        let appsChannel = message.guild.channels.cache.get(options.discord_options.alerts_channel);
         const error = new Discord.MessageEmbed()
             .setColor(options.color)
             .setAuthor(message.guild.name, message.guild.iconURL({dynamic: true}))

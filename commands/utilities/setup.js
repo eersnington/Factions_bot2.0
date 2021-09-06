@@ -23,7 +23,7 @@ module.exports = {
             'whitelist_channel': 'verify'
         }
 
-        let category = client.channels.cache.find(c => c.name.toLowerCase() == "factions bot" && c.type == "GUILD_CATEGORY");
+        let category = message.guild.channels.cache.find(c => c.name.toLowerCase() == "factions bot" && c.type == "GUILD_CATEGORY");
     
         if (!category){
             errEmbed.setTitle('⁉️ Missing Category')

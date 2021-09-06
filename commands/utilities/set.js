@@ -147,6 +147,14 @@ module.exports = {
                 delete discord_options["developer_role"];
             }
 
+            if (/\d/.test(discord_options["join_role"])){
+                setup3.addField('join_role ',  `<@&${discord_options["join_role"]}>`);
+                delete discord_options["join_role"];
+            } else {
+                setup3.addField('join_role ',  `\`\`Role not set\`\``);
+                delete discord_options["join_role"];
+            }
+
             for (let option in discord_options){
                 
                 if (/\d/.test(discord_options[option])){

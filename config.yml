@@ -18,7 +18,7 @@
 
 
 # Paste your discord bot token in-between the double quotes (Make sure you've watched the video on)
-discord_bot_token: "ODQyNjk5NTg5Mjk5NjAxNDI4.YJ5HJg.eys3p8s_q-h5BHqWJ45Bwtfg4d8"
+discord_bot_token: "ODQyNjk5NTg5Mjk5NjAxNDI4.YJ5HJg.G_AzFvKRWxE3Qe0PenSzpjGa4CI"
 
 
 # Create a role called "Factions bot" or "Developer" and paste it's id here.
@@ -41,7 +41,7 @@ auth: 'mojang'
 
 
 # Embed color, Only hex codes https://htmlcolorcodes.com/color-picker/
-embed_color: "#F1C40F"
+embed_color: "#E200FF"
 
 
 
@@ -57,12 +57,13 @@ application_settings:
     - "What is your IGN?"
     - "What is your age?"
     - "What is your timezone?"
-    - "What is your estimated playtime?"
-    - "State your previous factions"
+    - "How often can you play? How many hours can you play in a day? And are you willing to put in the hours/grind?"
+    - "What are your pfs and do you have anyone who can vouch for you?"
     - "Are you able to perform voice calls?"
     - "Do you have any knowledge with cannoning or patching?"
     - "Explain how to patch against a non ap cannon"
     - "Explain how to patch against a ap cannon"
     - "Explain what is buffer-check and how you do it"
+    - "Why do you want to join Cunts? And why should we accept you?"
   accepted_response: "Hey your application was reviewed by the management, and we would like to inform you that your application has been accepted.\nPlease message a Co-leader to get started with your interview."
   rejected_response: "Hey your application was reviewed by the management, and we are sorry to inform you that your application has been rejected."

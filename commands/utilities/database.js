@@ -34,7 +34,7 @@ module.exports = {
                 config: {mc_username: client.config.username, mc_password: client.config.password,  auth: client.config.auth}, 
                 minecraft_options:{bot: null, version: '1.8.9', ip: "pvp.thearchon.net", join_command: "/onyx"},
                 //discord bot variables
-                discord_options: {prefix: '*', developer_role: client.config.developer_role_id, server_chat_channel: null, weewoo_channel: null, buffer_channel: null,
+                discord_options: {prefix: '*', developer_role: client.config.developer_role_id, join_role: null, welcome_channel:null, server_chat_channel: null, weewoo_channel: null, buffer_channel: null,
                 ftop_channel: null, fptop_channel: null, flist_channel: null, alerts_channel: null, whitelist_channel: null, logs_channel: null, interval: 5},
                 //members
                 players: {

@@ -13,6 +13,7 @@
     "chalk": "^4.1.2",
     "cpu-stat": "^2.0.1",
     "discord-backup": "^3.0.1",
+    "discord-canvas": "^1.4.1",
     "discord-giveaways": "github:Androz2091/discord-giveaways#discord.js-v13",
     "discord-logs": "^2.0.1",
     "discord.js": "^13.1.0",
