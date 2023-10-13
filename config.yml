@@ -18,7 +18,7 @@
 
 
 # Paste your discord bot token in-between the double quotes (Make sure you've watched the video on)
-discord_bot_token: "ODQyNjk5NTg5Mjk5NjAxNDI4.YJ5HJg.G_AzFvKRWxE3Qe0PenSzpjGa4CI"
+discord_bot_token: "your bot token here"
 
 
 # Create a role called "Factions bot" or "Developer" and paste it's id here.
@@ -27,11 +27,11 @@ developer_role_id: '842714308576018453'
 
 
 # Minecraft alt's username (email)
-username: 'nadiabenc@gmail.com'
+username: 'your mc username'
 
 
 # Minecraft alt's password
-password: 'Aylan2501.'
+password: 'your mc pass'
 
 
 # Authentication Server
